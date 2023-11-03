@@ -9,10 +9,11 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class EngineeringAdapter(
-    private val data: ArrayList<Engineering>, // this is like a global variable
+    private val data: ArrayList<Engineering>,   // this is like a global variable
+    private val engineeringInterface: EngineeringInterface
 ) : RecyclerView.Adapter<EngineeringAdapter.EngineeringViewHolder>() {
 
-    // SoccerTeamsViewHolder inherits from RecyclerView
+    // EngineeringViewHolder inherits from RecyclerView
     // ViewHolder is a nested class defined inside the RecyclerView class
     inner class EngineeringViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.view_holder_engineering, parent, false)
@@ -24,7 +25,7 @@ class EngineeringAdapter(
             itemView.findViewById(R.id.engineeringDescription)
         private val button: Button = itemView.findViewById(R.id.button)
 
-        fun onBind(engineering: Engineering) {
+        fun onBind(engineering: Engineering, engineeringInterface: EngineeringInterface) {
             engineeringImage.setImageResource(engineering.imageDrawable)
             engineeringName.text = engineering.engineeringName
             engineeringDescription.text = engineering.engineeringDescription
@@ -32,7 +33,10 @@ class EngineeringAdapter(
 
             // This define what happen when the button is clicked
             button.setOnClickListener {
-                Toast.makeText(it.context, "$adapterPosition clicked", Toast.LENGTH_SHORT).show()
+                // Toast.makeText(it.context, "$adapterPosition clicked", Toast.LENGTH_SHORT).show()
+                // adapterPosition => position of the item of the Recycler View
+
+                engineeringInterface.onLearnMoreButtonClicked(adapterPosition)
             }
         }
     }
@@ -50,7 +54,7 @@ class EngineeringAdapter(
     }
 
     override fun onBindViewHolder(holder: EngineeringViewHolder, position: Int) {
-        holder.onBind(data[position])
+        holder.onBind(data[position], engineeringInterface)
     }
 
 }
