@@ -1,5 +1,7 @@
 package com.myfirstapp
 
+import java.io.Serializable
+
 data class Engineering(
     // things that will be in each item of the recycler view
     // val id: String = "",
@@ -13,4 +15,7 @@ data class Engineering(
     // resources such as drawables, strings,
     // layouts, and other assets in Android are
     // referenced using their unique integer IDs
-)
+) : Serializable
+
+// Serializable -> by using this, the systems knows how to read and write (and eventually, serialize) the
+// data that exists in the Engineering class

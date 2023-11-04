@@ -13,6 +13,12 @@ class MainActivity : AppCompatActivity(), EngineeringInterface {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // set the toolbar created in the layout as the ActionBar
+        setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.apply {
+            title = "My First App"
+        }
+
         // creating a list containing each item to be put in the recycler view
         engineeringList = createListOfEngineering()
 
@@ -27,7 +33,11 @@ class MainActivity : AppCompatActivity(), EngineeringInterface {
     }
 
     override fun onLearnMoreButtonClicked(position: Int) {
-        startActivity(Intent(this, EngineeringDetailActivity::class.java))
+        val engineering = engineeringList[position]
+        val intent = Intent(this, EngineeringDetailActivity::class.java).apply {
+            putExtra("engineering", engineering)
+        }
+        startActivity(intent)
     }
 
     private fun createListOfEngineering(): ArrayList<Engineering> {
