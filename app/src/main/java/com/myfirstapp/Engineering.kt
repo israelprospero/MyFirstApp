@@ -11,10 +11,12 @@ data class Engineering(
     val engineeringLongDescription: String = "",
     val buttonText: String = "",
     val imageURL: String? = null,
-    val imageDrawable: Int = 0
+    val imageDrawable: Int = 0,
     // resources such as drawables, strings,
     // layouts, and other assets in Android are
     // referenced using their unique integer IDs
+    val engineeringLink: String = "",
+    var isFavorite: Boolean = false
 ) : Serializable
 
 // Serializable -> by using this, the systems knows how to read and write (and eventually, serialize) the
