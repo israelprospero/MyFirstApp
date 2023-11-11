@@ -30,11 +30,21 @@ class EngineeringDetailActivity : AppCompatActivity() {
             title = "Engineering Overview"
         }
 
-        engineering = intent.getSerializableExtra("engineering") as? Engineering ?: Engineering(
+//        engineering = intent.getSerializableExtra("engineering") as? Engineering ?: Engineering(
+//            engineeringName = "Whoops",
+//            engineeringDescription = "Something went wrong. Please, try again"
+//        )
+        // ?: Engineering() -> we need this part in order to avoid an error
+        // the commented part was used when Engineering was Serializable
+
+        val selectedEngineeringId = intent.getStringExtra("engineeringId")
+        // MainActivity.engineeringList is referencing the static list that we have in MainActivity
+        engineering = MainActivity.engineeringList.find {
+            it.id == selectedEngineeringId
+        } ?: Engineering(
             engineeringName = "Whoops",
             engineeringDescription = "Something went wrong. Please, try again"
         )
-        // ?: Engineering() -> we need this part in order to avoid an error
 
         val engineeringImage: ImageView = findViewById(R.id.engineeringImage)
         val engineeringName: TextView = findViewById(R.id.engineeringName)

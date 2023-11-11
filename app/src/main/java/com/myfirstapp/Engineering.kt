@@ -4,7 +4,7 @@ import java.io.Serializable
 
 data class Engineering(
     // things that will be in each item of the recycler view
-    // val id: String = "",
+    val id: String = "",
     // val headerImageResId: Int = 0,
     val engineeringName: String = "",
     val engineeringDescription: String = "",
@@ -17,7 +17,7 @@ data class Engineering(
     // referenced using their unique integer IDs
     val engineeringLink: String = "",
     var isFavorite: Boolean = false
-) : Serializable
+)
 
 // Serializable -> by using this, the systems knows how to read and write (and eventually, serialize) the
 // data that exists in the Engineering class

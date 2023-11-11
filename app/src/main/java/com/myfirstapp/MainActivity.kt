@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity(), EngineeringInterface {
 
-    private lateinit var engineeringList: ArrayList<Engineering>
+    // making the variable static
+    companion object {
+        lateinit var engineeringList: ArrayList<Engineering>
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +38,7 @@ class MainActivity : AppCompatActivity(), EngineeringInterface {
     override fun onLearnMoreButtonClicked(position: Int) {
         val engineering = engineeringList[position]
         val intent = Intent(this, EngineeringDetailActivity::class.java).apply {
-            putExtra("engineering", engineering)
+            putExtra("engineeringId", engineering.id)
         }
         startActivity(intent)
     }
@@ -44,6 +47,7 @@ class MainActivity : AppCompatActivity(), EngineeringInterface {
         return ArrayList<Engineering>().apply {
             add(
                 Engineering(
+                    id = "civil",
                     engineeringName = "Civil Engineering",
                     engineeringDescription = "Focuses on the design, construction, and maintenance of infrastructure projects such as roads, bridges, buildings, and water supply systems.",
                     engineeringLongDescription = "Civil engineers are responsible for the design, construction, and maintenance of infrastructure projects such as roads, bridges, buildings, dams, and water supply systems. They ensure that these structures are not only functional but also safe, sustainable, and cost-effective.",
@@ -56,6 +60,7 @@ class MainActivity : AppCompatActivity(), EngineeringInterface {
 
             add(
                 Engineering(
+                    id = "electrical",
                     engineeringName = "Electrical Engineering",
                     engineeringDescription = "Focuses on the study and application of electricity, electronics, and electromagnetism in various systems, including power generation, communication, and control systems.",
                     engineeringLongDescription = "Electrical engineers specialize in the study and application of electricity, electronics, and electromagnetism. They work on a variety of systems, including power generation, transmission, and distribution, as well as electronic circuits, telecommunications, and control systems. Their work ranges from designing microchips and computer systems to developing power generation technologies and renewable energy sources.",
@@ -68,6 +73,7 @@ class MainActivity : AppCompatActivity(), EngineeringInterface {
 
             add(
                 Engineering(
+                    id = "mechanical",
                     engineeringName = "Mechanical Engineering",
                     engineeringDescription = "Involves the design, development, and maintenance of mechanical systems, including machines, engines, and tools.",
                     engineeringLongDescription = "Mechanical engineers work on the design, development, and maintenance of mechanical systems. They deal with machines, engines, and tools, ensuring that these systems operate efficiently and reliably. This field includes a broad range of applications, from automotive and aerospace technology to manufacturing processes and robotics.",
@@ -80,6 +86,7 @@ class MainActivity : AppCompatActivity(), EngineeringInterface {
 
             add(
                 Engineering(
+                    id = "computer",
                     engineeringName = "Computer Engineering",
                     engineeringDescription = "Combines elements of computer science and electrical engineering to design and develop computer hardware and software systems.",
                     engineeringLongDescription = "Computer engineers integrate elements of computer science and electrical engineering to design and develop computer hardware and software systems. They work on a wide range of computing devices, from microprocessors and circuit boards to software applications and networking systems. Computer engineers play a crucial role in advancing technology, driving innovation, and shaping the digital world.",
@@ -92,6 +99,7 @@ class MainActivity : AppCompatActivity(), EngineeringInterface {
 
             add(
                 Engineering(
+                    id = "industrial",
                     engineeringName = "Industrial Engineering",
                     engineeringDescription = "Involves the optimization of complex processes or systems by improving efficiency, productivity, and quality in various industries.",
                     engineeringLongDescription = "Industrial engineers optimize complex processes or systems by improving efficiency, productivity, and quality in various industries. They use their expertise in engineering, mathematics, and business to streamline production processes, reduce costs, and enhance overall operational performance. Industrial engineers work across different sectors, including manufacturing, logistics, healthcare, and service industries, contributing to the effective and efficient management of resources and operations.",
