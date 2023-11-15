@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 
 class EngineeringAdapter(
@@ -24,6 +25,7 @@ class EngineeringAdapter(
         private val engineeringDescription: TextView =
             itemView.findViewById(R.id.engineeringDescription)
         private val button: Button = itemView.findViewById(R.id.button)
+        private val favoriteImageView : AppCompatImageView = itemView.findViewById(R.id.favoriteImageView)
 
         fun onBind(engineering: Engineering, engineeringInterface: EngineeringInterface) {
             engineeringImage.setImageResource(engineering.imageDrawable)
@@ -37,6 +39,11 @@ class EngineeringAdapter(
                 // adapterPosition => position of the item of the Recycler View
 
                 engineeringInterface.onLearnMoreButtonClicked(adapterPosition)
+            }
+            val icon = if (engineering.isFavorite) R.drawable.ic_favorite_24dp else R.drawable.ic_favorite_border_24dp
+            favoriteImageView.setImageResource(icon)
+            favoriteImageView.setOnClickListener {
+                engineeringInterface.onFavoriteClicked(adapterPosition)
             }
         }
     }

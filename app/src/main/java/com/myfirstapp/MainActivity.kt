@@ -12,6 +12,9 @@ class MainActivity : AppCompatActivity(), EngineeringInterface {
         lateinit var engineeringList: ArrayList<Engineering>
     }
 
+    private lateinit var engineeringAdapter: EngineeringAdapter
+
+    // onCreate => entry point for our activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,7 +28,7 @@ class MainActivity : AppCompatActivity(), EngineeringInterface {
         // creating a list containing each item to be put in the recycler view
         engineeringList = createListOfEngineering()
 
-        val engineeringAdapter = EngineeringAdapter(engineeringList, this)
+        engineeringAdapter = EngineeringAdapter(engineeringList, this)
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         // or we can write
         // val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
@@ -35,12 +38,25 @@ class MainActivity : AppCompatActivity(), EngineeringInterface {
         engineeringAdapter.notifyDataSetChanged()
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     override fun onLearnMoreButtonClicked(position: Int) {
         val engineering = engineeringList[position]
         val intent = Intent(this, EngineeringDetailActivity::class.java).apply {
             putExtra("engineeringId", engineering.id)
         }
         startActivity(intent)
+    }
+
+    override fun onFavoriteClicked(position: Int) {
+        val engineering = engineeringList[position]
+        engineering.isFavorite = !engineering.isFavorite
+
+        // engineeringAdapter.notifyDataSetChanged()    // This reruns, rebinds and recreates for all the views
+                                                        // (all the engineering blocks)
+        engineeringAdapter.notifyItemChanged(position) // This makes the card flicker a little
     }
 
     private fun createListOfEngineering(): ArrayList<Engineering> {
